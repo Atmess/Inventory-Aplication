@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Product</title>
+</head>
+<body>
+    <h1>Add a New Message</h1>
+    
+    <!-- Your form goes here -->
+    <form method="POST" action="/new">        
+            <select name="category_id" >
+                <% categories.forEach((category)=> { %>
+                <option value="<%= category.id %>"><%= category.name %></option>
+                <% }) %>
+            </select>                
+        <label for="author">Name:</label>
+        <input type="text" id="author" name="name">
+        
+        <label for="message">description:</label>
+        <input type="text" id="message" name="description">
+        
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price">
+
+        <label for="stock">Stock:</label>
+        <input type="text" id="stock" name="stock">
+
+        <button type="submit">Submit</button>
+    </form>
+    
+</body>
+</html>

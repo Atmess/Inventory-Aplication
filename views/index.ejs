@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<body>
+<div>
+  <h1>categories</h1>
+    <ul>
+       <% categories.forEach((category)=> { %>
+      <li>
+        <strong>ID:</strong> <%= category.id %>
+        <strong>Name:</strong> <%= category.name %>
+        <strong>Desc:</strong> <%= category.description %>
+      </li>
+  <% }) %>
+    </ul>
+  </div>
+
+
+
+    <h1><%= title %></h1>
+    <nav>
+        <% categories.forEach((categories)=> { %>
+      <button><%= categories.name %></button>
+  <% }) %>
+    </nav>
+   <ul>
+    <a href="/new">create New</a>
+  <% Product.forEach((Product)=> { %>
+    <li>
+      <strong>name:</strong> <%= Product.name %> <br>
+      <strong>description:</strong> <%= Product.description %> <br>
+      <strong>Price:</strong> <%= Product.price %><br>
+      <strong>Stock:</strong> <%= Product.stock %> <br>
+      <strong>categories:</strong> <%= Product.category_name %>
+       
+    </li>
+    <!-- Add this Delete Form -->
+    <form action="/delete/<%= Product.id %>" method="POST">
+      <button type="submit">Delete</button>
+    </form>
+  <% }) %>
+  
+</ul>
+</body>
