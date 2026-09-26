@@ -2,13 +2,16 @@
 <body>
 <div>
   <h1>categories</h1>
+  <a href="/newCategories">create New Categories</a>
     <ul>
        <% categories.forEach((category)=> { %>
       <li>
-        <strong>ID:</strong> <%= category.id %>
         <strong>Name:</strong> <%= category.name %>
         <strong>Desc:</strong> <%= category.description %>
       </li>
+       <form action="/deleteCategories/<%= category.id %>" method="POST">
+      <button type="submit">Delete</button>
+    </form>
   <% }) %>
     </ul>
   </div>
@@ -22,7 +25,7 @@
   <% }) %>
     </nav>
    <ul>
-    <a href="/new">create New</a>
+    <a href="/newProduct">create New Product</a>
   <% Product.forEach((Product)=> { %>
     <li>
       <strong>name:</strong> <%= Product.name %> <br>
@@ -32,11 +35,20 @@
       <strong>categories:</strong> <%= Product.category_name %>
        
     </li>
+    <div style="display: flex; flex-direction: row; gap: 10px;">
     <!-- Add this Delete Form -->
-    <form action="/delete/<%= Product.id %>" method="POST">
+    <form action="/deleteProduct/<%= Product.id %>" method="POST">
       <button type="submit">Delete</button>
     </form>
+     <button onclick="
+      const panel = document.getElementById('stock-update<%= Product.id %>')
+      panel.style.display = panel.style.display === 'none' ? 'inline' : 'none';
+     " >Update Stock</button>
+  </div>
+  <div id="stock-update<%= Product.id %>" style="display: none;"><button>test</button></div>
   <% }) %>
+
   
+ 
 </ul>
 </body>

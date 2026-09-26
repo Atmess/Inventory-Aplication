@@ -7,14 +7,21 @@ async function getCategories() {
 }
 
 async function getProduct() {
-  const SQL = `
-    SELECT products.*, categories.name AS category_name
-    FROM products
-    JOIN categories ON products.category_id = categories.id;
-  `;
-    const {rows} = await Pool.query(SQL)
+    const {rows} = await Pool.query("SELECT products.*, categories.name AS category_name FROM products JOIN categories ON products.category_id = categories.id;")
     return rows;
 }
+
+async function getProductsByCategoryId(categoryId) {
+    // We use $1 to safely insert the categoryId and prevent SQL injection
+    const { rows } = await Pool.query(
+        "SELECT * FROM products WHERE category_id = $1", 
+        [categoryId]
+    );
+    
+    // This returns an array of products. If empty, it returns []
+    return rows; 
+}
+
 
 async function insertProduct(productData) {
   // We use $1, $2, etc., to protect against SQL injection!
@@ -39,5 +46,19 @@ async function insertProduct(productData) {
 async function delateProduct(productId) {
   await Pool.query("DELETE FROM products WHERE id = $1",[productId])
 }
+async function deleteCategory(categoriesId) {
+   await Pool.query("DELETE FROM categories WHERE id = $1 ",[categoriesId])
+}
+async function insertCategory(name,description) {
+    await Pool.query("INSERT INTO categories (name,description) VALUES ($1,$2)",[name,description])
+}
 
-module.exports={getCategories,getProduct,insertProduct,delateProduct}
+async function UpdateStock(changeAmount,productId) {
+  try{
+    await Pool.query("UPDATE products SET stock = stock + $1 WHERE id = $2;", [changeAmount,productId])
+  } catch (error) {
+        console.error("Error updating stock:", error);
+      }
+
+  }
+module.exports={getCategories,getProduct,insertProduct,delateProduct,deleteCategory,insertCategory,getProductsByCategoryId,UpdateStock}

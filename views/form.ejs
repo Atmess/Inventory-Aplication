@@ -8,7 +8,7 @@
     <h1>Add a New Message</h1>
     
     <!-- Your form goes here -->
-    <form method="POST" action="/new">        
+    <form method="POST" action="/newProduct">        
             <select name="category_id" >
                 <% categories.forEach((category)=> { %>
                 <option value="<%= category.id %>"><%= category.name %></option>
