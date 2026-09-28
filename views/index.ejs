@@ -1,12 +1,26 @@
 <!DOCTYPE html>
+<head> 
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
 <body>
-<div>
+  <div id="container">
+<header><div class="headerid" onclick="
+        document.getElementById('Product').style.display = 'none';
+        document.getElementById('categories').style.display = 'block';
+  "><h1>categories</h1></div>
+        <div class="headerid" onclick="
+        document.getElementById('categories').style.display = 'none';
+        document.getElementById('Product').style.display = 'block';
+        "><h1>Product</h1></div>
+      </header>
+<div id="main">
+<div id="categories" >
   <h1>categories</h1>
   <a href="/newCategories">create New Categories</a>
     <ul>
        <% categories.forEach((category)=> { %>
       <li>
-        <strong>Name:</strong> <%= category.name %>
+        <strong>Name:</strong> <%= category.name %><br>
         <strong>Desc:</strong> <%= category.description %>
       </li>
        <form action="/deleteCategories/<%= category.id %>" method="POST">
@@ -17,9 +31,10 @@
   </div>
 
 
-
+<div id="Product" >
     <h1><%= title %></h1>
     <nav>
+      <button><a href="/">All Categories</a></button>
         <% categories.forEach((category)=> { %>
       <button ><a href="/categories/<%= category.id %>"><%= category.name %></a></button>
   <% }) %>
@@ -69,8 +84,8 @@
       <button type="submit">submit</button>
     </form></div>
   <% }) %>
-
-  
- 
 </ul>
+</div>
+</div>
+</div>
 </body>

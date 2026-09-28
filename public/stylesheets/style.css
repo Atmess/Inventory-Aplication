@@ -1,0 +1,24 @@
+body{
+    background-image: url("../images/live-twin-home.png");
+}
+
+#container{
+    width: 100dvw;
+    height: 100dvh;
+}
+header{
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    justify-content: center;
+    background-color: azure;
+    border: 10px solid black ;
+}
+#categories{
+    display: none;
+    font-size: larger;
+}
+#main{
+    height: 100%;
+background-color: rgba(103, 188, 255, 0.9);
+}
