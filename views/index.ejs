@@ -20,8 +20,8 @@
 
     <h1><%= title %></h1>
     <nav>
-        <% categories.forEach((categories)=> { %>
-      <button><%= categories.name %></button>
+        <% categories.forEach((category)=> { %>
+      <button ><a href="/categories/<%= category.id %>"><%= category.name %></a></button>
   <% }) %>
     </nav>
    <ul>
@@ -45,7 +45,29 @@
       panel.style.display = panel.style.display === 'none' ? 'inline' : 'none';
      " >Update Stock</button>
   </div>
-  <div id="stock-update<%= Product.id %>" style="display: none;"><button>test</button></div>
+  <div id="stock-update<%= Product.id %>" style="display: none;">
+    <button onclick="
+      const sellid = document.getElementById('sell-<%= Product.id%>')
+      const reStock = document.getElementById('ReStock-<%= Product.id%>')
+      reStock.style.display = 'none';
+      sellid.style.display = sellid.style.display === 'none' ? 'inline' : 'none';
+      ">sell</button>
+      <button onclick="
+      const ReStock = document.getElementById('ReStock-<%= Product.id%>')
+      const sellid = document.getElementById('sell-<%= Product.id%>')
+      sellid.style.display = 'none';
+      ReStock.style.display = ReStock.style.display === 'none' ? 'inline' : 'none';      
+      ">ReStock</button>
+    <form action="/updatestock/<%= Product.id %>" method="POST" id="sell-<%= Product.id %>" style="display: none;" onsubmit="this.change.value = -Math.abs(this.change.value)">
+      <label for="sell-change-<%= Product.id %>">Sell</label>
+      <input type="number" name="change" id="sell-change-<%= Product.id %>" min="1" required>
+      <button type="submit">submit</button>
+    </form>
+  <form action="/updatestock/<%= Product.id %>" method="POST" id="ReStock-<%= Product.id %>" style="display: none;">
+      <label for="restock-change-<%= Product.id %>">ReStock</label>
+      <input type="number" name="change" id="restock-change-<%= Product.id %>" min="1" required>
+      <button type="submit">submit</button>
+    </form></div>
   <% }) %>
 
   

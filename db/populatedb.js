@@ -1,5 +1,5 @@
 const { Client } = require('pg');
-require("dotenv").config();
+require('dotenv').config();
 
 const SQL = `
 CREATE TABLE IF NOT EXISTS categories (
@@ -49,17 +49,17 @@ VALUES
 `;
 
 async function main() {
-  console.log("Seeding database...");
+  console.log('Seeding database...');
   // Connect directly using a Client just for this script
   const client = new Client({
-    connectionString: process.env.DATABASE_URL
+    connectionString: process.env.DATABASE_URL,
   });
-  
+
   await client.connect();
   await client.query(SQL);
   await client.end();
-  
-  console.log("Done!");
+
+  console.log('Done!');
 }
 
 main();
